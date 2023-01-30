@@ -36,10 +36,11 @@ refs.startBtnEl.addEventListener('click', onStartClick);
 refs.startBtnEl.setAttribute('disabled', '');
 
 let selectedDate = null;
+let intervalId = null;
 
 // ====================================================================
 function onStartClick() {
-  setInterval(timer, 1000);
+  intervalId = setInterval(timer, 1000);
   refs.startBtnEl.setAttribute('disabled', '');
 }
 
@@ -56,6 +57,7 @@ function timer() {
   refs.secondsEl.textContent = seconds;
 
   if (diff <= 0) {
+    clearInterval(intervalId);
     Notiflix.Notify.success('Time is out. Choose a new date please');
   }
 }
